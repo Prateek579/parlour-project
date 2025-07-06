@@ -268,45 +268,45 @@ export default function Dashboard() {
     }
   };
 
-  const handlePunchIn = (employeeId: string) => {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    const dateString = now.toISOString().split('T')[0];
+  // const handlePunchIn = (employeeId: string) => {
+  //   const now = new Date();
+  //   const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  //   const dateString = now.toISOString().split('T')[0];
     
-    const employee = employees.find(emp => emp.id === employeeId);
-    if (employee) {
-      const newAttendance: Attendance = {
-        id: Date.now().toString(),
-        employeeId,
-        employeeName: employee.name,
-        date: dateString,
-        punchIn: timeString,
-        punchOut: '',
-        totalHours: ''
-      };
-      setAttendance([...attendance, newAttendance]);
-    }
-  };
+  //   const employee = employees.find(emp => emp.id === employeeId);
+  //   if (employee) {
+  //     const newAttendance: Attendance = {
+  //       id: Date.now().toString(),
+  //       employeeId,
+  //       employeeName: employee.name,
+  //       date: dateString,
+  //       punchIn: timeString,
+  //       punchOut: '',
+  //       totalHours: ''
+  //     };
+  //     setAttendance([...attendance, newAttendance]);
+  //   }
+  // };
 
-  const handlePunchOut = (attendanceId: string) => {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  // const handlePunchOut = (attendanceId: string) => {
+  //   const now = new Date();
+  //   const timeString = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
     
-    setAttendance(attendance.map(att => {
-      if (att.id === attendanceId) {
-        const punchInTime = new Date(`2024-01-15 ${att.punchIn}`);
-        const punchOutTime = now;
-        const diffHours = Math.round((punchOutTime.getTime() - punchInTime.getTime()) / (1000 * 60 * 60));
+  //   setAttendance(attendance.map(att => {
+  //     if (att.id === attendanceId) {
+  //       const punchInTime = new Date(`2024-01-15 ${att.punchIn}`);
+  //       const punchOutTime = now;
+  //       const diffHours = Math.round((punchOutTime.getTime() - punchInTime.getTime()) / (1000 * 60 * 60));
         
-        return {
-          ...att,
-          punchOut: timeString,
-          totalHours: `${diffHours}h`
-        };
-      }
-      return att;
-    }));
-  };
+  //       return {
+  //         ...att,
+  //         punchOut: timeString,
+  //         totalHours: `${diffHours}h`
+  //       };
+  //     }
+  //     return att;
+  //   }));
+  // };
 
   if (!user) {
     return (

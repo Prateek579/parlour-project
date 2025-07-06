@@ -44,14 +44,8 @@ export const createEmployee = async (req: Request, res: Response) => {
 // Get all employees
 export const getAllEmployees = async (req: Request, res: Response) => {
   try {
-    const { isActive } = req.query;
-    
-    let query = {};
-    if (isActive !== undefined) {
-      query = { isActive: isActive === 'true' };
-    }
-
-    const employees = await Employee.find(query).sort({ createdAt: -1 });
+    // Always filter for active employees
+    const employees = await Employee.find({ isActive: true }).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,

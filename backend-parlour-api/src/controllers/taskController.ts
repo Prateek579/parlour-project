@@ -69,28 +69,8 @@ export const createTask = async (req: AuthRequest, res: Response) => {
 // Get all tasks
 export const getAllTasks = async (req: Request, res: Response) => {
   try {
-    const { status, priority, assignedTo, isActive } = req.query;
-    
-    let query: any = {};
-    
-    // Add filters
-    if (status) {
-      query.status = status;
-    }
-    if (priority) {
-      query.priority = priority;
-    }
-    if (assignedTo) {
-      query.assignedTo = assignedTo;
-    }
-    if (isActive !== undefined) {
-      query.isActive = isActive === 'true';
-    }
 
-    const tasks = await Task.find(query)
-      .populate('assignedTo', 'name email position')
-      .populate('createdBy', 'name email')
-      .sort({ createdAt: -1 });
+    const tasks = await Task.find({ isActive: true }).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,

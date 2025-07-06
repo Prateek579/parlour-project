@@ -19,7 +19,7 @@ router.use(authenticateJWT);
 router.post('/', authorizeRoles(), createEmployee);
 
 // Get all employees (Admin and Superadmin only)
-router.get('/', requireRole(['admin', 'superadmin']), getAllEmployees);
+router.get('/', getAllEmployees);
 
 // Get employee by ID (Superadmin only)
 router.get('/:id', authorizeRoles(), getEmployeeById);
